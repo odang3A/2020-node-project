@@ -1,0 +1,104 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+<body>
+
+  <!-- Start your project here-->  
+  <%- include("../menu") %>
+
+  <!-- 상세조회 시작 -->
+
+  <div style="margin:10px;">
+  <!-- Material input -->
+    <div class="md-form">
+        <input 
+            type="text"
+            id="title" 
+            class="form-control"
+            value="<%= result.title %>"
+            readonly
+        />
+        <label for="title">Title</label>
+    </div>
+
+    <!-- Material input -->
+    <div class="md-form">
+        <input 
+            type="text"
+            id="director" 
+            class="form-control"
+            value="<%= result.director %>"
+            readonly
+        />
+        <label for="director">Director</label>
+    </div>
+
+    <!-- Material input -->
+    <div class="md-form">
+      <input 
+          type="text"
+          id="year" 
+          class="form-control"
+          value="<%= result.year %>"
+          readonly
+      />
+      <label for="year">Year</label>
+  </div>
+  </div>
+
+  <button 
+    type="button" 
+    class="btn btn-dark"
+    onclick="location.href='/api/movie'"
+    >
+    Exit
+  </button>
+
+  <button 
+    type="button" 
+    class="btn btn-dark"
+    onclick="location.href='/api/movie/<%= result._id %>/edit'"
+    >
+    Update
+  </button>
+
+  <button 
+    id="deleteBtn"
+    type="button" 
+    class="btn btn-dark"
+    >
+    Delete
+  </button>
+
+  <!-- 상세조회 끝 -->
+
+  <!-- End your project here-->
+
+  <%- include("../footer") %>
+
+  <script>
+    $(function() {
+        $("#deleteBtn").on("click", () => {
+            const result = confirm("삭제하시겠습니까?");
+
+            if(result) {
+              $.ajax({
+                url:"/api/movie/<%= result._id %>",
+                type: "DELETE", //delete
+              })
+              .done(() => {
+                location.href = "/api/movie";
+              })
+              .fail((request, status, error) => {
+                alert(request.responseText);
+              });
+            } else {
+              console.log("삭제 취소");
+            }
+        });
+    });
+  </script>
+
+</body>
+</html>

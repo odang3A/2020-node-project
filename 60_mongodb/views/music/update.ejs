@@ -1,0 +1,79 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+<body>
+
+  <!-- Start your project here-->  
+  <%- include("../menu") %>
+
+  <!-- 수정 시작 -->
+
+  
+<form id="updateForm">
+    <div style="margin:10px;">
+    <!-- Material input -->
+        <div class="md-form">
+            <input 
+                type="text"
+                id="singer" 
+                class="form-control"
+                value="<%= result.singer %>"
+                required
+            />
+            <label for="singer">Input Singer</label>
+        </div>
+
+        <!-- Material input -->
+        <div class="md-form">
+            <input 
+                type="text"
+                id="title" 
+                class="form-control"
+                value="<%= result.title %>"
+                required
+            />
+            <label for="title">Input Title</label>
+        </div>
+    </div>
+
+    <button 
+        type="submit" 
+        class="btn btn-dark"
+        >
+        Update
+    </button>
+</form>
+  
+
+  <!-- 등록 끝 -->
+
+  <!-- End your project here-->
+
+  <%- include("../footer") %>
+
+  <script>
+      $(function() {
+          $("#updateForm").submit((event) => {
+              event.preventDefault();
+              //등록
+              const singer = $("#singer").val();
+              const title = $("#title").val();
+
+              $.ajax({
+                  url:"/api/music/<%= result._id %>",
+                  type: "PUT", //put
+                  data: { singer, title }
+              })
+              .done(() => {
+                  location.href = "/api/music/<%= result._id %>";
+              })
+              .fail((request, status, error) => {
+                  alert(request.responseText);
+              });
+          });
+      });
+  </script>
+
+</body>
+</html>

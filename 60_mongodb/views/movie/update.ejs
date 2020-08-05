@@ -1,0 +1,92 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <%- include("../header"); %>
+<body>
+
+  <!-- Start your project here-->  
+  <%- include("../menu") %>
+
+  <!-- 수정 시작 -->
+
+  
+<form id="updateForm">
+    <div style="margin:10px;">
+    <!-- Material input -->
+        <div class="md-form">
+            <input 
+                type="text"
+                id="title" 
+                class="form-control"
+                value="<%= result.title %>"
+                required
+            />
+            <label for="title">Input Title</label>
+        </div>
+
+        <!-- Material input -->
+        <div class="md-form">
+            <input 
+                type="text"
+                id="director" 
+                class="form-control"
+                value="<%= result.director %>"
+                required
+            />
+            <label for="director">Input Director</label>
+        </div>
+
+        <!-- Material input -->
+        <div class="md-form">
+            <input 
+                type="text"
+                id="year" 
+                class="form-control"
+                value="<%= result.year %>"
+                required
+            />
+            <label for="year">Input Year</label>
+        </div>
+    </div>
+
+    <button 
+        type="submit" 
+        class="btn btn-dark"
+        >
+        Update
+    </button>
+</form>
+  
+
+  <!-- 등록 끝 -->
+
+  <!-- End your project here-->
+
+  <%- include("../footer") %>
+
+  <script>
+      $(function() {
+          $("#updateForm").submit((event) => {
+              event.preventDefault();
+              //등록
+              const title = $("#title").val();
+              const director = $("#director").val();
+              const year = $("#year").val();
+
+              $.ajax({
+                  url:"/api/movie/<%= result._id %>",
+                  type: "PUT", //put
+                  data: { title, director, year }
+              })
+              .done(() => {
+                  location.href = "/api/movie/<%= result._id %>";
+              })
+              .fail((request, status, error) => {
+                  alert(request.responseText);
+              });
+          });
+      });
+  </script>
+
+</body>
+</html>
