@@ -116,6 +116,11 @@ const inserted = todo.concat({
     text: "저녁밥 먹기",
     done: false,
 });
+
+inserted[0].done = false;
+console.log(todo[0].done, inserted[0].done);
+console.log("************");    // map 사용
+
 console.log(todo);
 console.log(inserted);
 
@@ -131,15 +136,15 @@ console.log(toggled);
 
 // 4. 라이브러리 가져오기
 // node.js : CommonJS에 정의된 require 사용
-const moment = require("moment");
+//const moment = require("moment");
 
 // ES6(ES2015)에서 새로 도입된 키워드
 // react :
-import moment from "moment";
+//import moment from "moment";
 
 // 내보내기
 // node.js
 module.exports = {};
 
 // react
-export default 컴포넌트명;
+//export default 컴포넌트명;
