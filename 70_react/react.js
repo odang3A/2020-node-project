@@ -148,3 +148,21 @@ module.exports = {};
 
 // react
 //export default 컴포넌트명;
+
+// ES6 : 계산된 속성명(computed property name)
+const key = "name";
+const obj2 = {
+    [key]: "value",
+}
+
+console.log(obj2.key);
+console.log(obj2.name);
+
+let i = 0;
+const obj3 = {
+    ["key" + ++i]: i,
+    ["key" + ++i]: i,
+    ["key" + ++i]: i,
+}
+
+console.log(obj3);
