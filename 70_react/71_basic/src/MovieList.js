@@ -1,4 +1,5 @@
-import React, { useEffect, useMemo } from 'react'
+import React, { useEffect, useMemo, useContext } from 'react'
+import { MovieContext } from './MovieReducerApp'
 
 function Movie({ movie, onRemove, onToggle }) {
     const { id, title, director, year, active } = movie;
@@ -25,13 +26,29 @@ function Movie({ movie, onRemove, onToggle }) {
     )
 }
 
-function MovieList({movieList, onRemove, onToggle}) {
+function MovieList({movieList}) {
     const countActiveMovie = () => {
         console.log("Active된 Movie 개수 세기");
         return movieList.filter(movie => movie.active).length
     }
 
     const count = useMemo(countActiveMovie, [movieList]);
+
+    const dispatch = useContext(MovieContext);
+
+    const onRemove = (id) => {
+        dispatch({
+            type: "REMOVE",
+            id,
+        })
+    }
+
+    const onToggle = (id) => {
+        dispatch({
+            type: "TOGGLE",
+            id,
+        })
+    }
 
     return (
         <>

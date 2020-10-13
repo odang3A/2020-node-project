@@ -1,6 +1,29 @@
-import React from 'react'
+import React, { useRef, useContext } from 'react'
+import { MusicContext } from './MusicReducerApp'
 
-function CreateMusic({title, singer, onChange, onCreate}) {
+function CreateMusic({title, singer}) {
+    const dispatch = useContext(MusicContext);
+
+    // nextId = {current: 4}
+    const nextId = useRef(4);
+
+    const onCreate = () => {
+        dispatch({
+            type: "CREATE",
+            id: nextId.current,
+        })
+        
+        nextId.current += 1;
+    }
+
+    const onChange = (e) => {
+        const { name, value } = e.target;
+        dispatch({
+            type: "CHANGE",
+            name,
+            value
+        })
+    }
     
     return (
         <>

@@ -1,4 +1,4 @@
-import React , { useReducer, useRef } from 'react';
+import React , { useReducer, useRef, createContext } from 'react';
 import MusicList from './MusicList';
 import CreateMusic from './CreateMusic';
 
@@ -32,7 +32,7 @@ function reducer(state, action) {
             return {
                 ...initialState,
                 musicList: musicList.concat({
-                    id: action.nextId.current, 
+                    id: action.id, 
                     ...music
                 })
             };
@@ -57,51 +57,26 @@ function reducer(state, action) {
     }
 }
 
-function MusicStateApp() {
+export const MusicContext = createContext(null);
+
+function MusicReducerApp() {
     const [state, dispatch] = useReducer(reducer, initialState);
     const { title, singer } = state.music;
     const { musicList } = state;
 
-    // nextId = {current: 4}
-    const nextId = useRef(4);
-    const onCreate = () => {
-        dispatch({
-            type: "CREATE",
-            nextId,
-        })
-        
-        nextId.current += 1;
-    }
-
-    const onChange = (e) => {
-        const { name, value } = e.target;
-        dispatch({
-            type: "CHANGE",
-            name,
-            value
-        })
-    }
-
-    const onRemove = (id) => {
-        dispatch({
-            type: "REMOVE",
-            id
-        })
-    }
-
-    const onToggle = (id) => {
-        dispatch({
-            type: "TOGGLE",
-            id
-        })
-    }
-
     return (
         <>
-            <CreateMusic title={title} singer={singer} onChange={onChange} onCreate={onCreate} />
-            <MusicList musicList={musicList} onRemove={onRemove} onToggle={onToggle} />
+            <MusicContext.Provider value={dispatch}>
+                <CreateMusic 
+                    title={title} 
+                    singer={singer}
+                />
+                <MusicList 
+                    musicList={musicList}
+                />
+            </MusicContext.Provider>
         </>
     )
 }
 
-export default MusicStateApp;
+export default MusicReducerApp;

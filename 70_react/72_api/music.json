@@ -1,0 +1,22 @@
+{
+  "musicList": [
+    {
+      "id": 1,
+      "singer": "유산슬",
+      "title": "합정역5번출구",
+      "active": false
+    },
+    {
+      "id": 2,
+      "singer": "지코",
+      "title": "평범하게",
+      "active": false
+    },
+    {
+      "id": 3,
+      "singer": "악동뮤지션",
+      "title": "크레셴도",
+      "active": false
+    }
+  ]
+}

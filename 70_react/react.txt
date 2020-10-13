@@ -72,3 +72,24 @@
 
 
 # 두번 렌더링 되는 경우: index.js에서 StrictMode가 개발환경에서만 자동으로 실행시킴(오류 검출)
+
+13. useReducer
+- 상태를 업데이트 하는 로직을 컴포넌트에서 분리
+- useState: 간단한 데이터 처리
+- useReducer: 복잡한 데이터 처리
+- function reducer(state, action) { ... }
+- const [state, dispatch] = useReducer(reducer, { ... })
+- dispatch({ type: "CREATE", ... })
+
+14. Context: 프로젝트 안에서 전역적으로 사용하는 값을 관리
+1) createContext()로 Context 생성하기
+2) Context.Porvider 컴포넌트에 value값 셋팅하기
+3) useContext()로 Context값 불러오기
+
+15. API 연동하기
+- npx create-react-app 72_api
+- cd 72_api
+- yarn add axios (REST 요청 시 Promise기반으로 HTTP Client용 라이브러리)
+- yarn global add json-server
+- music.json 파일 생성
+- json-server --watch music.json --port 5000
