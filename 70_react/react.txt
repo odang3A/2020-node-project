@@ -93,3 +93,13 @@
 - yarn global add json-server
 - music.json 파일 생성
 - json-server --watch music.json --port 5000
+- MusicList, Music 컴포넌트를 useReducer로 구현
+
+16. react-async로 요청하기
+- yarn add react-async
+- MusicList, Music 컴포넌트를 useAsync로 구현
+
+17. 리액트 라우터
+- Recat Router: 컴포넌트를 기반을 라우팅을 함
+- yarn add react-router-dom
+- 
